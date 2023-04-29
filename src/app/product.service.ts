@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, Observable, of, tap } from "rxjs";
 import { Product } from "../model/product";
 
@@ -9,6 +9,10 @@ import { Product } from "../model/product";
 export class ProductService {
 
   private productUrl = 'api/products';  // URL to web api
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -40,6 +44,20 @@ export class ProductService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  addProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.productUrl, product, this.httpOptions).pipe(
+      // tap((newProduct: Hero) => this.log(`added hero w/ id=${newProduct.id}`)),
+      catchError(this.handleError<Product>('addProduct'))
+    );
+  }
+
+  updateProduct(product: Product): Observable<any> {
+    return this.http.put(this.productUrl, product, this.httpOptions).pipe(
+      // tap(_ => this.log(`updated hero id=${Product.id}`)),
+      catchError(this.handleError<any>('updateProduct'))
+    );
   }
 
 
