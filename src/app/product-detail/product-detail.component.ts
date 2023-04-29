@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 import { Product } from "../../model/product";
 import { ProductService } from "../product.service";
 
@@ -10,7 +11,10 @@ import { ProductService } from "../product.service";
 export class ProductDetailComponent {
   product: Product | undefined;
 
-  constructor(private productService: ProductService) {
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute,
+  ) {
   }
 
   ngOnInit(): void {
@@ -18,8 +22,8 @@ export class ProductDetailComponent {
   }
 
   getProduct(): void {
-    // const id = Number(this.route.snapshot.paramMap.get('id'));
-    const id = 12;
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    // const id = 12;
     this.productService.getProduct(id)
       .subscribe(product => this.product = product);
   }

@@ -12,11 +12,19 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.productUrl)
+      .pipe(
+        // tap(_ => this.log('fetched heroes')),
+        catchError(this.handleError<Product[]>('getProducts', []))
+      );
+  }
+
   getProduct(id: number): Observable<Product> {
     const url = `${this.productUrl}/${id}`;
     return this.http.get<Product>(url).pipe(
       // tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Product>(`getHero id=${id}`))
+      catchError(this.handleError<Product>(`getProduct id=${id}`))
     );
   }
 

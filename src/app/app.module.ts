@@ -7,11 +7,13 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
+import { ProductListComponent } from './product-list/product-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
