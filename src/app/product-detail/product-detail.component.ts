@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Product } from "../../model/product";
 import { ProductService } from "../product.service";
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-product-detail',
@@ -14,6 +15,7 @@ export class ProductDetailComponent {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
+    private location: Location
   ) {
   }
 
@@ -25,5 +27,9 @@ export class ProductDetailComponent {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.productService.getProduct(id)
       .subscribe(product => this.product = product);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

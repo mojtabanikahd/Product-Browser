@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProductService } from "../product.service";
 import { Product } from "../../model/product";
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-product-upsert',
@@ -21,7 +22,8 @@ export class ProductUpsertComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +52,10 @@ export class ProductUpsertComponent implements OnInit {
         });
     }
     console.warn(this.productForm.value);
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }
