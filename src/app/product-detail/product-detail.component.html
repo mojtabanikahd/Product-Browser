@@ -1,10 +1,36 @@
-<div *ngIf="product">
-  <h2>{{product.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{product.id}}</div>
-  <div><span>description: </span>{{product.description}}</div>
-  <div><span>image: </span>{{product.image}}</div>
-  <nav>
-    <a routerLink="/product/{{product.id}}/edit">Edit</a>
-  </nav>
+<div *ngIf="product" class="grid-container">
+  <mat-card>
+    <mat-card-content class="container-card">
+      <mat-grid-list cols="{{colNum}}" rowHeight="450px">
+
+        <mat-grid-tile [colspan]="1">
+          <div class="image-div">
+            {{product.image}}
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="math.max(1, colNum - 2)" [rowspan]="math.min(2, 4 - colNum)">
+          <mat-card class="explanation-card">
+            <mat-card-header>
+              <mat-card-title>{{product.name}}</mat-card-title>
+              <mat-card-subtitle>Product</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="explanation-card-content">
+              {{product.description}}
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+      <mat-card-actions align="end">
+        <button mat-button routerLink="/product/{{product.id}}/edit">EDIT</button>
+        <button mat-button (click)="delete(product.id)">DELETE</button>
+      </mat-card-actions>
+
+    </mat-card-content>
+  </mat-card>
+
   <button type="button" (click)="goBack()">go back</button>
+
 </div>
