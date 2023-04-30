@@ -10,6 +10,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductUpsertComponent } from './product-upsert/product-upsert.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     ),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
