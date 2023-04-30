@@ -60,5 +60,13 @@ export class ProductService {
     );
   }
 
+  deleteProduct(id: number): Observable<Product> {
+    const url = `${this.productUrl}/${id}`;
+
+    return this.http.delete<Product>(url, this.httpOptions).pipe(
+      // tap(_ => this.log(`deleted hero id=${id}`)),
+      catchError(this.handleError<Product>('deleteProduct'))
+    );
+  }
 
 }

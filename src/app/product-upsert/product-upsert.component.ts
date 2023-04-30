@@ -12,7 +12,7 @@ import { Location } from "@angular/common";
 })
 export class ProductUpsertComponent implements OnInit {
   productForm = this.fb.group({
-    id: [{value: 0, disabled: true}],
+    // id: [{value: 0, disabled: true}],
     name: ['', Validators.required],
     description: [''],
     image: ['', Validators.required]
@@ -43,7 +43,7 @@ export class ProductUpsertComponent implements OnInit {
     if (id) {
       this.productService.updateProduct({'id': id, ...this.productForm.value} as Product)
         .subscribe(product => {
-          this.router.navigate([`/product/${id}`]);
+          this.goBack();
         });
     } else {
       this.productService.addProduct(this.productForm.value as Product)

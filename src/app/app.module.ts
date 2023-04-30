@@ -11,6 +11,10 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductUpsertComponent } from './product-upsert/product-upsert.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { LayoutModule } from "@angular/cdk/layout";
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
       InMemoryDataService, { dataEncapsulation: false }
     ),
     ReactiveFormsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatGridListModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
