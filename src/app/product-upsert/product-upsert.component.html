@@ -1,18 +1,48 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+<div class="container">
+  <mat-card class="container-card">
 
-<!--  <label for="id">Id: </label>-->
-<!--  <input id="id" type="number" formControlName="id">-->
+    <mat-card-header>
+      <mat-card-title>{{id ? productForm.get('name')!.value : 'New Product'}}</mat-card-title>
+      <mat-card-subtitle>{{id ? 'Edit' : 'Add'}}</mat-card-subtitle>
+    </mat-card-header>
 
-  <label for="name">Name: </label>
-  <input id="name" type="text" formControlName="name">
+    <mat-card-content class="content">
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
 
-  <label for="description">Description: </label>
-  <input id="description" type="text" formControlName="description">
+        <!--  <label for="id">Id: </label>-->
+        <!--  <input id="id" type="number" formControlName="id">-->
 
-  <label for="image">Image: </label>
-  <input id="image" type="text" formControlName="image">
+        <mat-form-field class="product-full-width">
+          <mat-label>Name: </mat-label>
+          <input matInput id="name" type="text" formControlName="name" placeholder="AirPods Pro 2021">
+          <mat-error *ngIf="productForm.get('name')!.hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
 
-  <button type="submit" [disabled]="!productForm.valid">Submit</button>
-  <button type="button" (click)="goBack()">go back</button>
+        <mat-form-field class="product-full-width">
+          <mat-label for="description">Description: </mat-label>
+          <textarea matInput id="description" type="text" formControlName="description" placeholder="Personalized Spatial Audio..."></textarea>
+          <mat-error *ngIf="productForm.get('description')!.hasError('required')">
+            Description is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
 
-</form>
+        <mat-form-field class="product-full-width">
+          <mat-label for="image">Image: </mat-label>
+          <input matInput id="image" type="text" formControlName="image" placeholder="base64;sdfdsf">
+          <mat-error *ngIf="productForm.get('image')!.hasError('required')">
+            Image is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-card-actions align="end">
+          <button type="submit" [disabled]="!productForm.valid">Submit</button>
+        </mat-card-actions>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<button type="button" (click)="goBack()">go back</button>

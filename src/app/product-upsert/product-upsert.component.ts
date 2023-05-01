@@ -14,9 +14,11 @@ export class ProductUpsertComponent implements OnInit {
   productForm = this.fb.group({
     // id: [{value: 0, disabled: true}],
     name: ['', Validators.required],
-    description: [''],
+    description: ['', Validators.required],
     image: ['', Validators.required]
   });
+
+  readonly id = Number(this.route.snapshot.paramMap.get('id'));
 
   constructor(
     private fb: FormBuilder,
@@ -27,21 +29,19 @@ export class ProductUpsertComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
-      this.getProduct(id);
+    if (this.id) {
+      this.getProduct(this.id);
     }
   }
 
   getProduct(id: number): void {
     this.productService.getProduct(id)
-      .subscribe(product => this.productForm.setValue(product));
+      .subscribe(product => {const {'id':_, ...pr} = product; this.productForm.setValue(pr);});
   }
 
   onSubmit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id) {
-      this.productService.updateProduct({'id': id, ...this.productForm.value} as Product)
+    if (this.id) {
+      this.productService.updateProduct({'id': this.id, ...this.productForm.value} as Product)
         .subscribe(product => {
           this.goBack();
         });

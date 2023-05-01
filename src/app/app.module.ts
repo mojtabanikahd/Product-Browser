@@ -15,6 +15,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { LayoutModule } from "@angular/cdk/layout";
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LayoutModule } from "@angular/cdk/layout";
     MatCardModule,
     MatButtonModule,
     MatGridListModule,
+    MatInputModule,
     LayoutModule
   ],
   providers: [],
