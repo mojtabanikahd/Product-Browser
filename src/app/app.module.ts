@@ -16,6 +16,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { LayoutModule } from "@angular/cdk/layout";
 import { MatInputModule } from "@angular/material/input";
+import { MatToolbar, MatToolbarModule } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { MatInputModule } from "@angular/material/input";
     MatButtonModule,
     MatGridListModule,
     MatInputModule,
+    MatToolbarModule,
+    MatIconModule,
     LayoutModule
   ],
   providers: [],

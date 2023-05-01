@@ -37,7 +37,7 @@
         </mat-form-field>
 
         <mat-card-actions align="end">
-          <button type="submit" [disabled]="!productForm.valid">Submit</button>
+          <button mat-button type="submit" [disabled]="!productForm.valid">SUBMIT</button>
         </mat-card-actions>
 
       </form>
@@ -45,4 +45,4 @@
   </mat-card>
 </div>
 
-<button type="button" (click)="goBack()">go back</button>
+<button mat-button color="primary" (click)="goBack()"><mat-icon>arrow_back</mat-icon>BACK</button>

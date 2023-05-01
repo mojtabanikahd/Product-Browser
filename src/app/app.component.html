@@ -1,7 +1,17 @@
-<h1>Product Browser</h1>
-<nav>
-  <a routerLink="/products">List</a>
-  <br />
-  <a routerLink="/products/add">Add</a>
-</nav>
+<mat-toolbar color="primary" class="mat-elevation-z3">
+<!--  <button mat-icon-button aria-label="icon-button with menu icon">-->
+<!--    <mat-icon>menu</mat-icon>-->
+<!--  </button>-->
+  <span>Product Browser</span>
+  <button mat-button routerLink="/products" class="first-button">List</button>
+  <button mat-button routerLink="/products/add">Add</button>
+  <span class="spacer"></span>
+<!--  <button mat-icon-button aria-label="icon-button with heart icon">-->
+<!--    <mat-icon>favorite</mat-icon>-->
+<!--  </button>-->
+<!--  <button mat-icon-button aria-label="icon-button with share icon">-->
+<!--    <mat-icon>share</mat-icon>-->
+<!--  </button>-->
+</mat-toolbar>
+
 <router-outlet></router-outlet>
