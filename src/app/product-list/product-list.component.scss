@@ -4,9 +4,16 @@
 
 .product-list-card {
   width: 400px;
-  height: 370px;
+  height: 450px;
 }
 
 .product-list-card-content {
   height: 100%;
+}
+
+.card-image {
+  width: 100%;
+  //display: block;
+  max-height: 300px;
+  //height: auto;
 }

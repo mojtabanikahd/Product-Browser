@@ -58,4 +58,66 @@ export class ProductUpsertComponent implements OnInit {
     this.location.back();
   }
 
+  handleImageUpload(event: Event) {
+    // check for image to upload
+    // this checks if the user has uploaded any file
+    const fileList = (event.currentTarget as HTMLInputElement).files as FileList;
+    if (fileList && fileList[0]) {
+      // calculate your image sizes allowed for upload
+      const max_size = 20971510;
+      // the only MIME types allowed
+      const allowed_types = ['image/png', 'image/jpeg','image/jpg'];
+      // max image height allowed
+      const max_height = 14200;
+      //max image width allowed
+      const max_width = 15600;
+
+      // check the file uploaded by the user
+      if (fileList[0].size > max_size) {
+        //show error
+       console.log('max image size allowed is ' + max_size / 1000 + 'Mb');
+       return;
+      }
+      // check for allowable types
+      if (!allowed_types.includes(fileList[0].type)) {
+        // define the error message due to wrong MIME type
+       console.log('The allowed images are: ( JPEG | JPG | PNG )');
+        //return false since the MIME type is wrong
+       return;
+      }
+      // define a file reader constant
+      const reader = new FileReader();
+      // read the file on load
+      reader.onload = (e: any) => {
+        // create an instance of the Image()
+        const image = new Image();
+        // get the image source
+        image.src = e.target.result;
+        // @ts-ignore
+        image.onload = rs => {
+          // get the image height read
+          const img = rs.currentTarget as HTMLImageElement;
+          const img_height = img['height'];
+          // get the image width read
+          const img_width = img['width'];
+          // check if the dimensions meet the required height and width
+          if (img_height > max_height && img_width > max_width) {
+            // throw error due to unmatched dimensions
+            console.log(
+              'Maximum dimensions allowed: ' +
+              max_height +
+              '*' +
+              max_width +
+              'px');
+            return;
+          } else {
+            // otherise get the base64 image
+            this.productForm.patchValue({'image': e.target.result});
+          }
+        };
+      };
+      // reader as data url
+      reader.readAsDataURL(fileList[0]);
+    }
+  }
 }

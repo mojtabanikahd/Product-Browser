@@ -4,9 +4,7 @@
       <mat-grid-list cols="{{colNum}}" rowHeight="450px">
 
         <mat-grid-tile [colspan]="1">
-          <div class="image-div">
-            {{product.image}}
-          </div>
+          <img class="image-div" src="{{product.image}}" alt="{{product.name}}" />
         </mat-grid-tile>
 
         <mat-grid-tile [colspan]="math.max(1, colNum - 2)" [rowspan]="math.min(2, 4 - colNum)">

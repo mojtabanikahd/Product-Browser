@@ -28,13 +28,17 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="product-full-width">
-          <mat-label for="image">Image: </mat-label>
-          <input matInput id="image" type="text" formControlName="image" placeholder="base64;sdfdsf">
-          <mat-error *ngIf="productForm.get('image')!.hasError('required')">
-            Image is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
+<!--        <mat-form-field class="product-full-width">-->
+<!--          <mat-label for="image">Image: </mat-label>-->
+<!--          <input matInput id="image" type="text" formControlName="image" placeholder="base64;sdfdsf">-->
+<!--          <mat-error *ngIf="productForm.get('image')!.hasError('required')">-->
+<!--            Image is <strong>required</strong>-->
+<!--          </mat-error>-->
+<!--        </mat-form-field>-->
+
+        <img mat-card-image src="{{this.productForm.value['image']}}" alt="{{this.productForm.value['name']}}" class="card-image">
+
+        <input type="file" id="file" (change)="handleImageUpload($event)" class="form-control-file" required="">
 
         <mat-card-actions align="end">
           <button mat-button type="submit" [disabled]="!productForm.valid">SUBMIT</button>

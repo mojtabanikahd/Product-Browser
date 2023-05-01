@@ -1,5 +1,5 @@
 <div class="grid-container">
-  <mat-grid-list cols="{{colNum | async}}" rowHeight="450px">
+  <mat-grid-list cols="{{colNum | async}}" rowHeight="500px">
     <mat-grid-tile *ngFor="let product of products">
       <mat-card class="product-list-card" routerLink="/product/{{product.id}}">
         <mat-card-header>
@@ -9,6 +9,7 @@
         <mat-card-content class="product-list-card-content">
           {{product.description}}
         </mat-card-content>
+        <img mat-card-image src="{{product.image}}" alt="{{product.name}}" class="card-image">
         <mat-card-actions align="end">
           <button mat-button routerLink="/product/{{product.id}}/edit">EDIT</button>
           <button mat-button (click)="deleteProduct(product.id)">DELETE</button>
