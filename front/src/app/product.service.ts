@@ -8,7 +8,7 @@ import { Product } from "../model/product";
 })
 export class ProductService {
 
-  private productUrl = 'api/products';  // URL to web api
+  private baseUrl = 'http://localhost:3000/api';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,7 +17,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productUrl)
+    return this.http.get<Product[]>(`${this.baseUrl}/products`)
       .pipe(
         // tap(_ => this.log('fetched heroes')),
         catchError(this.handleError<Product[]>('getProducts', []))
@@ -25,7 +25,7 @@ export class ProductService {
   }
 
   getProduct(id: number): Observable<Product> {
-    const url = `${this.productUrl}/${id}`;
+    const url = `${this.baseUrl}/product/${id}`;
     return this.http.get<Product>(url).pipe(
       // tap(_ => this.log(`fetched hero id=${id}`)),
       catchError(this.handleError<Product>(`getProduct id=${id}`))
@@ -47,21 +47,21 @@ export class ProductService {
   }
 
   addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.productUrl, product, this.httpOptions).pipe(
+    return this.http.post<Product>(`${this.baseUrl}/product`, product, this.httpOptions).pipe(
       // tap((newProduct: Hero) => this.log(`added hero w/ id=${newProduct.id}`)),
       catchError(this.handleError<Product>('addProduct'))
     );
   }
 
   updateProduct(product: Product): Observable<any> {
-    return this.http.put(this.productUrl, product, this.httpOptions).pipe(
+    return this.http.put(`${this.baseUrl}/product/${product.id}`, product, this.httpOptions).pipe(
       // tap(_ => this.log(`updated hero id=${Product.id}`)),
       catchError(this.handleError<any>('updateProduct'))
     );
   }
 
   deleteProduct(id: number): Observable<Product> {
-    const url = `${this.productUrl}/${id}`;
+    const url = `${this.baseUrl}/product/${id}`;
 
     return this.http.delete<Product>(url, this.httpOptions).pipe(
       // tap(_ => this.log(`deleted hero id=${id}`)),

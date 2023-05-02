@@ -30,9 +30,9 @@ import { MatIconModule } from "@angular/material/icon";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    ),
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, { dataEncapsulation: false }
+    // ),
     ReactiveFormsModule,
     NoopAnimationsModule,
     MatCardModule,

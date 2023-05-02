@@ -4,14 +4,16 @@ import express from 'express'
 const jwt = require("jsonwebtoken");
 
 const prisma = new PrismaClient()
+var cors = require('cors')
 const app = express()
 
-app.use(express.json())
+app.use(cors())
+app.use(express.json({limit: '50mb'}));
 
 
 // JWT Handler
 //Passed
-app.post("/login", async (req, res, next) => {
+app.post("/api/login", async (req, res, next) => {
   let { username, password } = req.body;
   
   if (username != "test" || password != "test") {
@@ -42,7 +44,8 @@ app.post("/login", async (req, res, next) => {
   }
 });
 
-app.post(`/product`, (req, res, next)=> {  
+/*
+app.post(`/api/product`, (req, res, next)=> {  
 	let token = req.headers["x-access-token"];
     //Authorization: 'Bearer TOKEN'
     if(!token)
@@ -57,11 +60,11 @@ app.post(`/product`, (req, res, next)=> {
 	}
 	next();
 })
-
+*/
 
 
 // RESTfull API for CRUD operations
-app.post(`/product`, async (req, res) => {
+app.post(`/api/product`, async (req, res) => {
   const { name, description, image } = req.body
   
   const result = await prisma.product.create({
@@ -75,7 +78,7 @@ app.post(`/product`, async (req, res) => {
 })
 
 //Passed
-app.put('/product/:id', async (req, res) => {
+app.put('/api/product/:id', async (req, res) => {
   const { id } = req.params
   const { name, description, image } = req.body
 
@@ -96,7 +99,7 @@ app.put('/product/:id', async (req, res) => {
 })
 
 //Passed
-app.delete(`/product/:id`, async (req, res) => {
+app.delete(`/api/product/:id`, async (req, res) => {
   const { id } = req.params
   const product = await prisma.product.delete({
     where: {
@@ -107,13 +110,13 @@ app.delete(`/product/:id`, async (req, res) => {
 })
 
 //Passed
-app.get('/products', async (req, res) => {
+app.get('/api/products', async (req, res) => {
   const products = await prisma.product.findMany()
   res.json(products)
 })
 
 //Passed
-app.get('/product/:id', async (req, res) => {
+app.get('/api/product/:id', async (req, res) => {
   const { id } = req.params
 
   const product = await prisma.product.findUnique({
