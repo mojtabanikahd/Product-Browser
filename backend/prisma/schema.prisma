@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://openfabric_db:1qaz!QAZ@localhost:3306/openfabric_db"
+}
+
+model Product {
+  id			Int		@id @default(autoincrement())
+  name			String
+  description	String?
+  image			String?	@db.MediumText
+}
