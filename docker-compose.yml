@@ -8,8 +8,18 @@ services:
       - MYSQL_DATABASE=openfabric_db
       - MYSQL_USER=openfabric_db
       - MYSQL_PASSWORD=1qaz!QAZ
+      - MYSQL_ROOT_HOST=%
     expose:
       - "3306"
+
+  db-privileges:
+    image: mysql/mysql-server
+    command: mysql -u root -pMySQL --host db -e "GRANT ALL PRIVILEGES ON *.* TO 'openfabric_db'"
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
       
   backend:
     image: product-browser-back
@@ -22,6 +32,12 @@ services:
         condition: service_healthy
     links:
       - db
+
+  backend-migrate:
+    image: product-browser-back
+    command: npx prisma migrate dev --name init
+    depends_on:
+      - backend
  
   frontend:
     image: product-browser-front
