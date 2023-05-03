@@ -44,8 +44,7 @@ app.post("/api/login", async (req, res, next) => {
   }
 });
 
-/*
-app.post(`/api/product`, (req, res, next)=> {  
+app.post(`/api/product`, (req, res, next)=> {
 	let token = req.headers["x-access-token"];
     //Authorization: 'Bearer TOKEN'
     if(!token)
@@ -60,7 +59,6 @@ app.post(`/api/product`, (req, res, next)=> {
 	}
 	next();
 })
-*/
 
 
 // RESTfull API for CRUD operations

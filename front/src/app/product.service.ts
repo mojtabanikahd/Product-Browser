@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { catchError, Observable, of, tap } from "rxjs";
+import { catchError, Observable, of, switchMap, tap } from "rxjs";
 import { Product } from "../model/product";
+import { Login } from "../model/Login";
 
 @Injectable({
   providedIn: 'root'
@@ -47,10 +48,17 @@ export class ProductService {
   }
 
   addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.baseUrl}/product`, product, this.httpOptions).pipe(
-      // tap((newProduct: Hero) => this.log(`added hero w/ id=${newProduct.id}`)),
-      catchError(this.handleError<Product>('addProduct'))
-    );
+    return this.http.post<Login>(`${this.baseUrl}/login`, {username: 'test', password: 'test'}, this.httpOptions).pipe(
+      switchMap<Login, Observable<Product>>(login => {
+        return this.http.post<Product>(`${this.baseUrl}/product`, product, {headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'x-access-token' : login['data']['token']
+          })}).pipe(
+          // tap((newProduct: Hero) => this.log(`added hero w/ id=${newProduct.id}`)),
+          catchError(this.handleError<Product>('addProduct'))
+        )
+      })
+    )
   }
 
   updateProduct(product: Product): Observable<any> {
