@@ -1,0 +1,35 @@
+version: "2.4"
+services:
+  
+  db:
+    image: mysql/mysql-server
+    environment:
+      - MYSQL_ROOT_PASSWORD=MySQL
+      - MYSQL_DATABASE=openfabric_db
+      - MYSQL_USER=openfabric_db
+      - MYSQL_PASSWORD=1qaz!QAZ
+    expose:
+      - "3306"
+      
+  backend:
+    image: product-browser-back
+    build:
+      context: ./backend
+    expose:
+      - "3000"
+    depends_on: 
+      db:
+        condition: service_healthy
+    links:
+      - db
+ 
+  frontend:
+    image: product-browser-front
+    build:
+      context: ./front
+    ports:
+      - "4200:80"
+    depends_on: 
+      - backend
+    links:
+      - backend
