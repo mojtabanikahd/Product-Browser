@@ -9,7 +9,7 @@ import { Login } from "../model/Login";
 })
 export class ProductService {
 
-  private baseUrl = 'http://localhost:3000/api';  // URL to web api
+  private baseUrl = '/api';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
