@@ -58,6 +58,13 @@ export class ProductUpsertComponent implements OnInit {
     this.location.back();
   }
 
+  trigger(event: Event) {
+    event.preventDefault();
+
+    let element: HTMLElement = document.getElementById('file') as HTMLElement;
+    element.click();
+  }
+
   handleImageUpload(event: Event) {
     // check for image to upload
     // this checks if the user has uploaded any file

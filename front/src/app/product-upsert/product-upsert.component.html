@@ -36,7 +36,11 @@
 <!--          </mat-error>-->
 <!--        </mat-form-field>-->
 
+        <mat-error *ngIf="productForm.get('image')!.hasError('required')">
+          Image is <strong>required</strong>
+        </mat-error>
         <img mat-card-image src="{{this.productForm.value['image']}}" alt="{{this.productForm.value['name']}}" class="card-image">
+        <button mat-button color="primary" (click)="trigger($event)">BROWSE</button>
 
         <input type="file" id="file" (change)="handleImageUpload($event)" class="form-control-file" required="">
 
